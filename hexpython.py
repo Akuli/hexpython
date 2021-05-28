@@ -10,11 +10,6 @@ __module_version__ = "0.1"
 __module_description__ = "Run Python code in hexchat and post result to channel"
 
 
-currently_running = False
-
-
-
-
 def message_callback(words, words_to_end, userdata):
     if not words or words[0] != '>>>':
         return hexchat.EAT_NONE
