@@ -29,7 +29,10 @@ def message_callback(words, words_to_end, userdata):
             except BaseException:
                 traceback.print_exc()
 
-    output = output_stream.getvalue().replace('\n', ' ').strip()[:100] or '(no output)'
+    output = output_stream.getvalue().replace('\n', ' ').strip() or '(no output)'
+    if len(output) > 100:
+        output = output[:50] + ' ... ' + output[-50:]
+
     channel = hexchat.get_info("channel")
     hexchat.command(f"msg {channel} >>> {python_code}")
     hexchat.command(f"msg {channel} {output}")
