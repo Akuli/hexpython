@@ -9,10 +9,10 @@ __module_name__ = "hexpython"
 __module_version__ = "0.1"
 __module_description__ = "Run Python code in hexchat and post result to channel"
 
-print("Hexpython plugin loaded.")
-
 
 currently_running = False
+
+
 
 
 def message_callback(words, words_to_end, userdata):
@@ -30,8 +30,10 @@ def message_callback(words, words_to_end, userdata):
                 traceback.print_exc()
 
     output = output_stream.getvalue().replace('\n', ' ').strip() or '(no output)'
-    if len(output) > 100:
-        output = output[:50] + ' ... ' + output[-50:]
+
+    half_length = 70
+    if len(output) > 2*half_length:
+        output = output[:half_length] + ' ... ' + output[-half_length:]
 
     channel = hexchat.get_info("channel")
     hexchat.command(f"msg {channel} >>> {python_code}")
@@ -40,3 +42,4 @@ def message_callback(words, words_to_end, userdata):
 
 
 hexchat.hook_command("", message_callback)
+print("Hexpython plugin loaded.")
