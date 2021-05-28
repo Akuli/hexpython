@@ -12,8 +12,14 @@ __module_description__ = "Run Python code in hexchat and post result to channel"
 print("Hexpython plugin loaded.")
 
 
-def py_callback(split_to_words, word_to_end, userdata):
-    python_code = word_to_end[1]
+currently_running = False
+
+
+def message_callback(words, words_to_end, userdata):
+    if not words or words[0] != '>>>':
+        return hexchat.EAT_NONE
+
+    python_code = words_to_end[1]
     output_stream = io.StringIO()
 
     with contextlib.redirect_stdout(output_stream):
@@ -30,4 +36,4 @@ def py_callback(split_to_words, word_to_end, userdata):
     return hexchat.EAT_ALL
 
 
-hexchat.hook_command("PY3", py_callback, help="/PY code Run Python code and post result to channel")
+hexchat.hook_command("", message_callback)
