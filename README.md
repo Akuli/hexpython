@@ -12,6 +12,10 @@ Try without installing:
     - Terminal (if you have installed git): `git clone https://github.com/Akuli/hexpython`
     - Click green "Code" button on GitHub, click "Download ZIP", then extract the zip
 2. In HexChat, type `/load` and then path to the file. For example, `/load /home/akuli/hexpython/hexpython.py`.
+    If you get `Maybe you need to install the Perl or Python plugin?` errors on Windows,
+    you likely need to install Python 3.6.
+    A newer version won't work; it has to be exactly 3.6.
+    See https://github.com/hexchat/hexchat/issues/2171.
 
 To install so that it auto-loads when HexChat starts, copy `hexpython.py` to HexChat's plugin folder:
 - Windows: open "Run" prompt from start menu, type `%appdata%\HexChat\Addons`, drag and drop `hexpython.py` there
